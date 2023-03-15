@@ -21,9 +21,9 @@ namespace GloiathNationalBank.Test
 
             IRateService rateService = new RateService(rateClient.Object);
 
-            double expected = rateService.GetRate(Currency.EUR, Currency.USD).Result;
+            double actual = rateService.GetRate(Currency.EUR, Currency.USD).Result;
 
-            Assert.AreEqual(expected, 1.36);
+            Assert.AreEqual(1.36, actual);
         }
 
         /// <summary>
@@ -37,9 +37,9 @@ namespace GloiathNationalBank.Test
 
             IRateService rateService = new RateService(rateClient.Object);
 
-            double expected = rateService.GetRate(Currency.USD, Currency.CAD).Result;
+            double actual = rateService.GetRate(Currency.USD, Currency.CAD).Result;
 
-            Assert.AreEqual(expected, 1.01);
+            Assert.AreEqual(1.01, actual);
         }
 
         /// <summary>

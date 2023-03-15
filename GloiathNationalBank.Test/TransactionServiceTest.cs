@@ -30,11 +30,11 @@ namespace GloiathNationalBank.Test
             ITransactionService transactionService =
                 new TransactionService(transactionClient.Object, rateService.Object);
 
-            SearchTransactionDTO expected = transactionService.GetTransactions("T2006").Result;
+            SearchTransactionDTO actual = transactionService.GetTransactions("T2006").Result;
 
-            Assert.IsTrue(expected != null);
-            Assert.AreEqual(2, expected.Transactions.Count);
-            Assert.AreEqual(14.99, expected.TotalAmount);
+            Assert.IsTrue(actual != null);
+            Assert.AreEqual(2, actual.Transactions.Count);
+            Assert.AreEqual(14.99, actual.TotalAmount);
         }
 
         /// <summary>
