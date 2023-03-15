@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GloiathNationalBank.WebApi", "GloiathNationalBank.WebApi\GloiathNationalBank.WebApi.csproj", "{75C9D0E9-5120-4607-9447-E75024376B3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GloiathNationalBank.Domain", "GloiathNationalBank.Services\GloiathNationalBank.Domain.csproj", "{C7AA71C8-37D1-4B48-AEE6-76AC340298F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GloiathNationalBank.Common", "GloiathNationalBank.Common\GloiathNationalBank.Common.csproj", "{43178C58-940B-498B-B725-921E82698B11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GloiathNationalBank.Storage", "GloiathNationalBank.Storage\GloiathNationalBank.Storage.csproj", "{CB21CD4C-8007-426C-A1E4-A34917B329BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GloiathNationalBank.Test", "GloiathNationalBank.Test\GloiathNationalBank.Test.csproj", "{D5F3161E-AFC8-43B5-9E58-B0D653058E9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{7F0AC1FD-08AA-413E-B9E1-B0FEF9BA8FFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9880993F-495C-46C8-9D1F-A324990DAA98}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75C9D0E9-5120-4607-9447-E75024376B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75C9D0E9-5120-4607-9447-E75024376B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C9D0E9-5120-4607-9447-E75024376B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75C9D0E9-5120-4607-9447-E75024376B3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7AA71C8-37D1-4B48-AEE6-76AC340298F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7AA71C8-37D1-4B48-AEE6-76AC340298F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7AA71C8-37D1-4B48-AEE6-76AC340298F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7AA71C8-37D1-4B48-AEE6-76AC340298F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43178C58-940B-498B-B725-921E82698B11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43178C58-940B-498B-B725-921E82698B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43178C58-940B-498B-B725-921E82698B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43178C58-940B-498B-B725-921E82698B11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB21CD4C-8007-426C-A1E4-A34917B329BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB21CD4C-8007-426C-A1E4-A34917B329BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB21CD4C-8007-426C-A1E4-A34917B329BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB21CD4C-8007-426C-A1E4-A34917B329BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5F3161E-AFC8-43B5-9E58-B0D653058E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5F3161E-AFC8-43B5-9E58-B0D653058E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5F3161E-AFC8-43B5-9E58-B0D653058E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5F3161E-AFC8-43B5-9E58-B0D653058E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D5F3161E-AFC8-43B5-9E58-B0D653058E9D} = {7F0AC1FD-08AA-413E-B9E1-B0FEF9BA8FFA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EA97AE9-D165-4C33-B72F-F6967C3150E9}
+	EndGlobalSection
+EndGlobal
