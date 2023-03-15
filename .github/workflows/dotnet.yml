@@ -1,30 +1,27 @@
 name: CI
+
 on:
-  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
-
 jobs:
   build:
+
     runs-on: windows-latest
-  
-  steps:
-    - uses: actions/checkout@v3
+    
+    steps:
+      - uses: actions/checkout@v3
 
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
 
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
 
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1.1
+      - name: Restore Packages
+        run: nuget restore GloiathNationalBank.sln
 
-    - name: Restore Packages
-      run: nuget restore MySolution.sln
-
-    - name: Build app for release
-      run: msbuild GloiathNationalBank.sln -t:rebuild -verbosity:diag -property:Configuration=Release
+      - name: Build solution
+        run: msbuild GloiathNationalBank.sln -t:rebuild -property:Configuration=Release
