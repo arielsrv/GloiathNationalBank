@@ -1,7 +1,7 @@
-﻿using GloiathNationalBank.WebApi.Common.ErrorHandling;
-using System.Net.Http.Formatting;
+﻿using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
+using GloiathNationalBank.WebApi.Common.ErrorHandling;
 
 namespace GloiathNationalBank.WebApi
 {
@@ -16,9 +16,9 @@ namespace GloiathNationalBank.WebApi
             config.Services.Replace(typeof(IExceptionHandler), new PassthroughExceptionHandler());
             config.Services.Add(typeof(IExceptionLogger), new SimpleExceptionLogger());
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                "DefaultApi",
+                "api/{controller}/{id}",
+                new { id = RouteParameter.Optional }
             );
         }
     }

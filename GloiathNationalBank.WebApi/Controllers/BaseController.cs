@@ -6,10 +6,7 @@ namespace GloiathNationalBank.WebApi.Controllers
     {
         protected IHttpActionResult Execute<T>(T result)
         {
-            if (result == null)
-            {
-                return NotFound();
-            }
+            if (result == null) return NotFound();
 
             return Ok(result);
         }

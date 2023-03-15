@@ -3,26 +3,26 @@
     public class RateDto
     {
         /// <summary>
-        /// Gets or sets from.
+        ///     Gets or sets from.
         /// </summary>
         /// <value>
-        /// From.
+        ///     From.
         /// </value>
         public string From { get; set; }
 
         /// <summary>
-        /// Gets or sets to.
+        ///     Gets or sets to.
         /// </summary>
         /// <value>
-        /// To.
+        ///     To.
         /// </value>
         public string To { get; set; }
 
         /// <summary>
-        /// Gets or sets the rate.
+        ///     Gets or sets the rate.
         /// </summary>
         /// <value>
-        /// The rate.
+        ///     The rate.
         /// </value>
         public double Rate { get; set; }
     }

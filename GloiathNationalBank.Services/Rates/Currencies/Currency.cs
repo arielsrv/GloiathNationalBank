@@ -3,22 +3,22 @@
     public enum Currency
     {
         /// <summary>
-        /// The eur
+        ///     The eur
         /// </summary>
         EUR,
 
         /// <summary>
-        /// The cad
+        ///     The cad
         /// </summary>
         CAD,
 
         /// <summary>
-        /// The usd
+        ///     The usd
         /// </summary>
         USD,
 
         /// <summary>
-        /// The aud
+        ///     The aud
         /// </summary>
         AUD
     }

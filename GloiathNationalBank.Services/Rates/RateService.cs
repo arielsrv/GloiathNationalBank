@@ -1,46 +1,46 @@
-﻿using GloiathNationalBank.Services.Clients;
-using GloiathNationalBank.Services.Rates.Currencies;
-using log4net;
-using QuikGraph;
-using QuikGraph.Algorithms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using GloiathNationalBank.Services.Clients.Rates;
+using GloiathNationalBank.Services.Rates.Currencies;
+using log4net;
+using QuikGraph;
+using QuikGraph.Algorithms;
 
 namespace GloiathNationalBank.Services.Rates
 {
     public class RateService : IRateService
     {
         /// <summary>
-        /// The rate client
-        /// </summary>
-        private readonly IRateClient rateClient;
-
-        /// <summary>
-        /// The loaded
-        /// </summary>
-        private bool loaded;
-
-        /// <summary>
-        /// The rates
-        /// </summary>
-        private Dictionary<string, double> rates = new Dictionary<string, double>();
-
-        /// <summary>
-        /// The graph
-        /// </summary>
-        private readonly BidirectionalGraph<string, Edge<string>> currencies = new BidirectionalGraph<string, Edge<string>>();
-
-        /// <summary>
-        /// The logger
+        ///     The logger
         /// </summary>
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RateService"/> class.
+        ///     The graph
+        /// </summary>
+        private readonly BidirectionalGraph<string, Edge<string>> currencies =
+            new BidirectionalGraph<string, Edge<string>>();
+
+        /// <summary>
+        ///     The rate client
+        /// </summary>
+        private readonly IRateClient rateClient;
+
+        /// <summary>
+        ///     The loaded
+        /// </summary>
+        private bool loaded;
+
+        /// <summary>
+        ///     The rates
+        /// </summary>
+        private Dictionary<string, double> rates = new Dictionary<string, double>();
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="RateService" /> class.
         /// </summary>
         /// <param name="rateClient">The rate client.</param>
         public RateService(IRateClient rateClient)
@@ -49,7 +49,7 @@ namespace GloiathNationalBank.Services.Rates
         }
 
         /// <summary>
-        /// Gets the rate.
+        ///     Gets the rate.
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="target">The target.</param>
@@ -73,7 +73,8 @@ namespace GloiathNationalBank.Services.Rates
                     foreach (Edge<string> edge in currencies.Edges)
                     {
                         RateResponse result = response
-                            .FirstOrDefault(conversion => conversion.From.ToString() == edge.Source && conversion.To.ToString() == edge.Target);
+                            .FirstOrDefault(conversion =>
+                                conversion.From.ToString() == edge.Source && conversion.To.ToString() == edge.Target);
 
                         if (result != null) rates.Add(edge.ToString(), result.Rate);
                     }
@@ -84,9 +85,7 @@ namespace GloiathNationalBank.Services.Rates
 
                 double rate = 1.0;
                 if (tryGetPaths(target.ToString(), out IEnumerable<Edge<string>> path))
-                {
                     rate = path.Aggregate(rate, (current, edge) => current * rates[edge.ToString()]);
-                }
 
                 loaded = true;
 
@@ -100,17 +99,7 @@ namespace GloiathNationalBank.Services.Rates
         }
 
         /// <summary>
-        /// Edges the cost.
-        /// </summary>
-        /// <param name="edge">The edge.</param>
-        /// <returns></returns>
-        private static double EdgeCost(Edge<string> edge)
-        {
-            return 1;
-        }
-
-        /// <summary>
-        /// Gets the rates.
+        ///     Gets the rates.
         /// </summary>
         /// <returns></returns>
         public async Task<List<RateDto>> GetRates()
@@ -120,7 +109,6 @@ namespace GloiathNationalBank.Services.Rates
             List<RateDto> result = new List<RateDto>();
 
             if (response != null)
-            {
                 foreach (RateResponse rateResponse in response)
                 {
                     RateDto rateDto = new RateDto
@@ -131,9 +119,18 @@ namespace GloiathNationalBank.Services.Rates
                     };
                     result.Add(rateDto);
                 }
-            }
 
             return result;
+        }
+
+        /// <summary>
+        ///     Edges the cost.
+        /// </summary>
+        /// <param name="edge">The edge.</param>
+        /// <returns></returns>
+        private static double EdgeCost(Edge<string> edge)
+        {
+            return 1;
         }
     }
 }

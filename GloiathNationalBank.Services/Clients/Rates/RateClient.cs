@@ -9,12 +9,12 @@ namespace GloiathNationalBank.Services.Clients.Rates
     public class RateClient : Client, IRateClient
     {
         /// <summary>
-        /// The storage provider
+        ///     The storage provider
         /// </summary>
         private readonly IStorageProvider storageProvider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RateClient"/> class.
+        ///     Initializes a new instance of the <see cref="RateClient" /> class.
         /// </summary>
         /// <param name="storageProvider">The storage provider.</param>
         public RateClient(IStorageProvider storageProvider)
@@ -23,7 +23,7 @@ namespace GloiathNationalBank.Services.Clients.Rates
         }
 
         /// <summary>
-        /// Gets the rates.
+        ///     Gets the rates.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="System.ApplicationException">Rates service unavailable.</exception>
@@ -34,29 +34,23 @@ namespace GloiathNationalBank.Services.Clients.Rates
             List<RateResponse> result;
             try
             {
-                result = await this.Get<List<RateResponse>>(url);
-                
+                result = await Get<List<RateResponse>>(url);
+
                 List<RateResponse> value = result;
-                _ = Task.Run(async () =>
-                {
-                    await this.storageProvider.Add(GetKey(), value);
-                });
+                _ = Task.Run(async () => { await storageProvider.Add(GetKey(), value); });
             }
             catch (Exception)
             {
-                result = await this.storageProvider.Get<List<RateResponse>>(GetKey());
+                result = await storageProvider.Get<List<RateResponse>>(GetKey());
             }
 
-            if (result == null)
-            {
-                throw new ApplicationException("Rates service unavailable. ");
-            }
+            if (result == null) throw new ApplicationException("Rates service unavailable. ");
 
             return result;
         }
 
         /// <summary>
-        /// Gets the key.
+        ///     Gets the key.
         /// </summary>
         /// <returns></returns>
         private static string GetKey()

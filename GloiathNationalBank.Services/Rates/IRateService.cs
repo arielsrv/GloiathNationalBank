@@ -1,19 +1,19 @@
-﻿using GloiathNationalBank.Services.Rates.Currencies;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using GloiathNationalBank.Services.Rates.Currencies;
 
 namespace GloiathNationalBank.Services.Rates
 {
     public interface IRateService
     {
         /// <summary>
-        /// Gets the rates.
+        ///     Gets the rates.
         /// </summary>
         /// <returns></returns>
         Task<List<RateDto>> GetRates();
 
         /// <summary>
-        /// Gets the rate.
+        ///     Gets the rate.
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="target">The target.</param>

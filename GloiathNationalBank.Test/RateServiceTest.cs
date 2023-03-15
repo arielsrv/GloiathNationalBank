@@ -1,10 +1,9 @@
-﻿using GloiathNationalBank.Services.Clients;
+﻿using System.Collections.Generic;
+using GloiathNationalBank.Services.Clients.Rates;
 using GloiathNationalBank.Services.Rates;
 using GloiathNationalBank.Services.Rates.Currencies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
-using GloiathNationalBank.Services.Clients.Rates;
 
 namespace GloiathNationalBank.Test
 {
@@ -12,7 +11,7 @@ namespace GloiathNationalBank.Test
     public class RateServiceTest
     {
         /// <summary>
-        /// Gets the rates.
+        ///     Gets the rates.
         /// </summary>
         [TestMethod]
         public void GetRates()
@@ -28,7 +27,7 @@ namespace GloiathNationalBank.Test
         }
 
         /// <summary>
-        /// Gets the missing rates.
+        ///     Gets the missing rates.
         /// </summary>
         [TestMethod]
         public void GetMissingRates()
@@ -44,7 +43,7 @@ namespace GloiathNationalBank.Test
         }
 
         /// <summary>
-        /// Gets the list response.
+        ///     Gets the list response.
         /// </summary>
         /// <returns></returns>
         private List<RateResponse> GetListResponse()

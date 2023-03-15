@@ -1,10 +1,10 @@
-﻿using GloiathNationalBank.WebApi.App_Start;
-using log4net.Config;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using GloiathNationalBank.WebApi.App_Start;
+using log4net.Config;
 
 namespace GloiathNationalBank.WebApi
 {

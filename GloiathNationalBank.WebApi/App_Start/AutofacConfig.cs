@@ -1,7 +1,8 @@
-﻿using Autofac;
+﻿using System.Configuration;
+using System.Web.Http;
+using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
-using GloiathNationalBank.Services.Clients;
 using GloiathNationalBank.Services.Clients.Rates;
 using GloiathNationalBank.Services.Clients.Transactions;
 using GloiathNationalBank.Services.Rates;
@@ -14,7 +15,6 @@ using StackExchange.Redis.Extensions.Core.Configuration;
 using StackExchange.Redis.Extensions.Core.Implementations;
 using StackExchange.Redis.Extensions.Newtonsoft;
 using static System.Reflection.Assembly;
-using static System.Web.Http.GlobalConfiguration;
 using static System.Web.Mvc.DependencyResolver;
 
 namespace GloiathNationalBank.WebApi.App_Start
@@ -52,7 +52,7 @@ namespace GloiathNationalBank.WebApi.App_Start
 
             // Set MVC DI resolver to use our Autofac container
             SetResolver(new AutofacDependencyResolver(Container));
-            Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(Container);
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(Container);
         }
 
         private static void Build(ContainerBuilder containerBuilder)
@@ -64,27 +64,28 @@ namespace GloiathNationalBank.WebApi.App_Start
             })).As<ISerializer>().SingleInstance();
 
             containerBuilder.Register(cacheClient =>
-            {
-                string connectionString = System.Configuration.ConfigurationManager
-                    .AppSettings
-                    .Get("StorageProvider.ConnectionString");
-
-                RedisConfiguration redisConfiguration = new RedisConfiguration
                 {
-                    ConnectionString = connectionString
-                };
-                IRedisCacheConnectionPoolManager redisCacheConnectionPoolManager = new RedisCacheConnectionPoolManager(redisConfiguration);
-                ISerializer serializer = Container.Resolve<ISerializer>();
-                return new RedisCacheClient(redisCacheConnectionPoolManager, serializer, redisConfiguration);
-            })
-             .As<IRedisCacheClient>().SingleInstance();
+                    string connectionString = ConfigurationManager
+                        .AppSettings
+                        .Get("StorageProvider.ConnectionString");
+
+                    RedisConfiguration redisConfiguration = new RedisConfiguration
+                    {
+                        ConnectionString = connectionString
+                    };
+                    IRedisCacheConnectionPoolManager redisCacheConnectionPoolManager =
+                        new RedisCacheConnectionPoolManager(redisConfiguration);
+                    ISerializer serializer = Container.Resolve<ISerializer>();
+                    return new RedisCacheClient(redisCacheConnectionPoolManager, serializer, redisConfiguration);
+                })
+                .As<IRedisCacheClient>().SingleInstance();
 
             containerBuilder.Register<IStorageProvider>(
-                 cacheClient => new StorageProvider(Container.Resolve<IRedisCacheClient>()))
+                    cacheClient => new StorageProvider(Container.Resolve<IRedisCacheClient>()))
                 .As<IStorageProvider>().SingleInstance();
 
             containerBuilder.Register(rateClient => new RateClient(Container.Resolve<IStorageProvider>()))
-                            .As<IRateClient>().SingleInstance();
+                .As<IRateClient>().SingleInstance();
 
             containerBuilder.Register(transactionClient => new TransactionClient())
                 .As<ITransactionClient>().SingleInstance();
@@ -92,7 +93,8 @@ namespace GloiathNationalBank.WebApi.App_Start
             containerBuilder.Register(rateService => new RateService(Container.Resolve<IRateClient>()))
                 .As<IRateService>().SingleInstance();
 
-            containerBuilder.Register(transactionService => new TransactionService(Container.Resolve<ITransactionClient>(), Container.Resolve<IRateService>()))
+            containerBuilder.Register(transactionService =>
+                    new TransactionService(Container.Resolve<ITransactionClient>(), Container.Resolve<IRateService>()))
                 .As<ITransactionService>().SingleInstance();
         }
     }

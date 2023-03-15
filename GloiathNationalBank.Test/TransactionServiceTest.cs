@@ -1,11 +1,10 @@
-﻿using GloiathNationalBank.Services.Clients;
+﻿using System.Collections.Generic;
+using GloiathNationalBank.Services.Clients.Transactions;
 using GloiathNationalBank.Services.Rates;
 using GloiathNationalBank.Services.Rates.Currencies;
 using GloiathNationalBank.Services.Transactions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
-using GloiathNationalBank.Services.Clients.Transactions;
 
 namespace GloiathNationalBank.Test
 {
@@ -13,7 +12,7 @@ namespace GloiathNationalBank.Test
     public class TransactionServiceTest
     {
         /// <summary>
-        /// Gets the transaction by sku.
+        ///     Gets the transaction by sku.
         /// </summary>
         [TestMethod]
         public void GetTransactionBySku()
@@ -28,7 +27,8 @@ namespace GloiathNationalBank.Test
             rateService.Setup(x => x.GetRate(Currency.EUR, Currency.EUR)).ReturnsAsync(1);
             rateService.Setup(x => x.GetRate(Currency.USD, Currency.EUR)).ReturnsAsync(0.736);
 
-            ITransactionService transactionService = new TransactionService(transactionClient.Object, rateService.Object);
+            ITransactionService transactionService =
+                new TransactionService(transactionClient.Object, rateService.Object);
 
             SearchTransactionDTO expected = transactionService.GetTransactions("T2006").Result;
 
@@ -36,8 +36,9 @@ namespace GloiathNationalBank.Test
             Assert.AreEqual(2, expected.Transactions.Count);
             Assert.AreEqual(14.99, expected.TotalAmount);
         }
+
         /// <summary>
-        /// Gets the list response.
+        ///     Gets the list response.
         /// </summary>
         /// <returns></returns>
         private List<TransactionResponse> GetListResponse()

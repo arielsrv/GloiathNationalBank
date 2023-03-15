@@ -5,10 +5,10 @@ namespace GloiathNationalBank.Services.Transactions
     public class BaseTransactionDTO
     {
         /// <summary>
-        /// Gets or sets the sku.
+        ///     Gets or sets the sku.
         /// </summary>
         /// <value>
-        /// The sku.
+        ///     The sku.
         /// </value>
         public string Sku { get; set; }
     }
@@ -16,18 +16,18 @@ namespace GloiathNationalBank.Services.Transactions
     public class TransactionDTO : BaseTransactionDTO
     {
         /// <summary>
-        /// Gets or sets the amount.
+        ///     Gets or sets the amount.
         /// </summary>
         /// <value>
-        /// The amount.
+        ///     The amount.
         /// </value>
         public double Amount { get; set; }
 
         /// <summary>
-        /// Gets or sets the currency.
+        ///     Gets or sets the currency.
         /// </summary>
         /// <value>
-        /// The currency.
+        ///     The currency.
         /// </value>
         public string Currency { get; set; }
     }
@@ -35,26 +35,26 @@ namespace GloiathNationalBank.Services.Transactions
     public class SearchTransactionDTO
     {
         /// <summary>
-        /// Gets or sets the transactions.
+        ///     Gets or sets the transactions.
         /// </summary>
         /// <value>
-        /// The transactions.
+        ///     The transactions.
         /// </value>
         public List<TransactionDTO> Transactions { get; set; }
 
         /// <summary>
-        /// Gets or sets the total amount.
+        ///     Gets or sets the total amount.
         /// </summary>
         /// <value>
-        /// The total amount.
+        ///     The total amount.
         /// </value>
         public double TotalAmount { get; set; }
 
         /// <summary>
-        /// Gets the sku.
+        ///     Gets the sku.
         /// </summary>
         /// <value>
-        /// The sku.
+        ///     The sku.
         /// </value>
         public string SKU { get; internal set; }
     }

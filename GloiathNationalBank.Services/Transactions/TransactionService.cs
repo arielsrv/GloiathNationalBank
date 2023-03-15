@@ -1,35 +1,34 @@
-﻿using GloiathNationalBank.Services.Clients;
-using GloiathNationalBank.Services.Rates;
-using GloiathNationalBank.Services.Rates.Currencies;
-using log4net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using GloiathNationalBank.Services.Clients.Transactions;
+using GloiathNationalBank.Services.Rates;
+using GloiathNationalBank.Services.Rates.Currencies;
+using log4net;
 
 namespace GloiathNationalBank.Services.Transactions
 {
     public class TransactionService : ITransactionService
     {
         /// <summary>
-        /// The transaction client
-        /// </summary>
-        private readonly ITransactionClient transactionClient;
-
-        /// <summary>
-        /// The rate service
-        /// </summary>
-        private readonly IRateService rateService;
-
-        /// <summary>
-        /// The logger
+        ///     The logger
         /// </summary>
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionService"/> class.
+        ///     The rate service
+        /// </summary>
+        private readonly IRateService rateService;
+
+        /// <summary>
+        ///     The transaction client
+        /// </summary>
+        private readonly ITransactionClient transactionClient;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TransactionService" /> class.
         /// </summary>
         /// <param name="transactionClient">The transaction client.</param>
         /// <param name="rateService">The rate service.</param>
@@ -40,7 +39,7 @@ namespace GloiathNationalBank.Services.Transactions
         }
 
         /// <summary>
-        /// Gets the transactions.
+        ///     Gets the transactions.
         /// </summary>
         /// <returns></returns>
         public async Task<List<TransactionDTO>> GetTransactions()
@@ -50,7 +49,6 @@ namespace GloiathNationalBank.Services.Transactions
             List<TransactionDTO> result = new List<TransactionDTO>();
 
             if (response != null)
-            {
                 foreach (TransactionResponse transactionResponse in response)
                 {
                     TransactionDTO rateDto = new TransactionDTO
@@ -62,13 +60,12 @@ namespace GloiathNationalBank.Services.Transactions
 
                     result.Add(rateDto);
                 }
-            }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the transactions.
+        ///     Gets the transactions.
         /// </summary>
         /// <param name="sku">The sku.</param>
         /// <returns></returns>
@@ -95,7 +92,8 @@ namespace GloiathNationalBank.Services.Transactions
                             TransactionDTO transactionDTO = new TransactionDTO
                             {
                                 Sku = transactionResponse.Sku,
-                                Amount = await ConvertAmount(transactionResponse.Amount, transactionResponse.Currency, Currency.EUR),
+                                Amount = await ConvertAmount(transactionResponse.Amount, transactionResponse.Currency,
+                                    Currency.EUR),
                                 Currency = Currency.EUR.ToString()
                             };
 
@@ -107,6 +105,7 @@ namespace GloiathNationalBank.Services.Transactions
                             .Sum(transaction => transaction.Amount);
                     }
                 }
+
                 return result;
             }
             catch (Exception e)
@@ -117,7 +116,7 @@ namespace GloiathNationalBank.Services.Transactions
         }
 
         /// <summary>
-        /// Converts the amount.
+        ///     Converts the amount.
         /// </summary>
         /// <param name="amount">The amount.</param>
         /// <param name="originalCurrency">The original currency.</param>
@@ -125,7 +124,7 @@ namespace GloiathNationalBank.Services.Transactions
         /// <returns></returns>
         private async Task<double> ConvertAmount(double amount, Currency originalCurrency, Currency targetCurrency)
         {
-            double rate = await this.rateService.GetRate(originalCurrency, targetCurrency);
+            double rate = await rateService.GetRate(originalCurrency, targetCurrency);
             return Math.Round(amount * rate, 2, MidpointRounding.ToEven);
         }
     }

@@ -1,6 +1,6 @@
-﻿using GloiathNationalBank.Services.Transactions;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
+using GloiathNationalBank.Services.Transactions;
 
 namespace GloiathNationalBank.WebApi.Controllers
 {
@@ -8,12 +8,12 @@ namespace GloiathNationalBank.WebApi.Controllers
     public class TransactionController : BaseController
     {
         /// <summary>
-        /// The transaction service
+        ///     The transaction service
         /// </summary>
         private readonly ITransactionService transactionService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionController"/> class.
+        ///     Initializes a new instance of the <see cref="TransactionController" /> class.
         /// </summary>
         /// <param name="transactionService">The transaction service.</param>
         public TransactionController(ITransactionService transactionService)
@@ -22,18 +22,18 @@ namespace GloiathNationalBank.WebApi.Controllers
         }
 
         /// <summary>
-        /// Gets this instance.
+        ///     Gets this instance.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("")]
         public async Task<IHttpActionResult> Get()
         {
-            return base.Execute(await this.transactionService.GetTransactions());
+            return Execute(await transactionService.GetTransactions());
         }
 
         /// <summary>
-        /// Gets the specified sku.
+        ///     Gets the specified sku.
         /// </summary>
         /// <param name="sku">The sku.</param>
         /// <returns></returns>
@@ -41,7 +41,7 @@ namespace GloiathNationalBank.WebApi.Controllers
         [Route("search")]
         public async Task<IHttpActionResult> Get([FromUri] string sku)
         {
-            return base.Execute(await this.transactionService.GetTransactions(sku));
+            return Execute(await transactionService.GetTransactions(sku));
         }
     }
 }

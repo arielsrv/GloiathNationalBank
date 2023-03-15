@@ -7,30 +7,30 @@ namespace GloiathNationalBank.Services.Clients.Rates
     public class RateResponse
     {
         /// <summary>
-        /// Gets or sets from.
+        ///     Gets or sets from.
         /// </summary>
         /// <value>
-        /// From.
+        ///     From.
         /// </value>
         [JsonProperty("from")]
         [JsonConverter(typeof(StringEnumConverter))]
         public Currency From { get; set; }
 
         /// <summary>
-        /// Gets or sets to.
+        ///     Gets or sets to.
         /// </summary>
         /// <value>
-        /// To.
+        ///     To.
         /// </value>
         [JsonProperty("to")]
         [JsonConverter(typeof(StringEnumConverter))]
         public Currency To { get; set; }
 
         /// <summary>
-        /// Gets or sets the rate.
+        ///     Gets or sets the rate.
         /// </summary>
         /// <value>
-        /// The rate.
+        ///     The rate.
         /// </value>
         [JsonProperty("rate")]
         public double Rate { get; set; }
