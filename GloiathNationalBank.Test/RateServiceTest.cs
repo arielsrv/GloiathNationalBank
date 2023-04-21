@@ -2,18 +2,17 @@
 using GloiathNationalBank.Services.Clients.Rates;
 using GloiathNationalBank.Services.Rates;
 using GloiathNationalBank.Services.Rates.Currencies;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Xunit;
 
 namespace GloiathNationalBank.Test
 {
-    [TestClass]
     public class RateServiceTest
     {
         /// <summary>
         ///     Gets the rates.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void GetRates()
         {
             Mock<IRateClient> rateClient = new Mock<IRateClient>();
@@ -23,13 +22,13 @@ namespace GloiathNationalBank.Test
 
             double actual = rateService.GetRate(Currency.EUR, Currency.USD).Result;
 
-            Assert.AreEqual(1.36, actual);
+            Assert.Equal(1.36, actual);
         }
 
         /// <summary>
         ///     Gets the missing rates.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void GetMissingRates()
         {
             Mock<IRateClient> rateClient = new Mock<IRateClient>();
@@ -39,7 +38,7 @@ namespace GloiathNationalBank.Test
 
             double actual = rateService.GetRate(Currency.USD, Currency.CAD).Result;
 
-            Assert.AreEqual(1.01, actual);
+            Assert.Equal(1.01, actual);
         }
 
         /// <summary>

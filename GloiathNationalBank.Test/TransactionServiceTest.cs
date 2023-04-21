@@ -3,18 +3,17 @@ using GloiathNationalBank.Services.Clients.Transactions;
 using GloiathNationalBank.Services.Rates;
 using GloiathNationalBank.Services.Rates.Currencies;
 using GloiathNationalBank.Services.Transactions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Xunit;
 
 namespace GloiathNationalBank.Test
 {
-    [TestClass]
     public class TransactionServiceTest
     {
         /// <summary>
         ///     Gets the transaction by sku.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void GetTransactionBySku()
         {
             Mock<ITransactionClient> transactionClient = new Mock<ITransactionClient>();
@@ -32,9 +31,9 @@ namespace GloiathNationalBank.Test
 
             SearchTransactionDTO actual = transactionService.GetTransactions("T2006").Result;
 
-            Assert.IsTrue(actual != null);
-            Assert.AreEqual(2, actual.Transactions.Count);
-            Assert.AreEqual(14.99, actual.TotalAmount);
+            Assert.NotNull(actual);
+            Assert.Equal(2, actual.Transactions.Count);
+            Assert.Equal(14.99, actual.TotalAmount);
         }
 
         /// <summary>
