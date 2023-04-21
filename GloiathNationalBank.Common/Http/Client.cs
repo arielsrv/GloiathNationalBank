@@ -82,20 +82,17 @@ namespace GloiathNationalBank.Common.Http
                 HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, requestUri);
                 httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                if (httpRequestMessage.Content != null && httpRequestMessage.Content.Headers != null)
+                if (httpRequestMessage.Content?.Headers != null)
                     AddHeaders(headers, httpRequestMessage.Content.Headers);
 
                 using (HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage))
                 {
                     string response = await httpResponseMessage.Content.ReadAsStringAsync();
 
-                    if (!httpResponseMessage.IsSuccessStatusCode)
-                    {
-                        logger.Error($"uri: {requestUri}, response: {response}");
-                        throw new ApiException(response);
-                    }
+                    if (httpResponseMessage.IsSuccessStatusCode) return JsonConvert.DeserializeObject<T>(response);
+                    logger.Error($"uri: {requestUri}, response: {response}");
+                    throw new ApiException(response);
 
-                    return JsonConvert.DeserializeObject<T>(response);
                 }
 
                 ;
@@ -107,11 +104,11 @@ namespace GloiathNationalBank.Common.Http
         /// </summary>
         /// <param name="headers">The headers.</param>
         /// <param name="httpContentHeaders">The HTTP content headers.</param>
-        private static void AddHeaders(IDictionary<string, string> headers, HttpContentHeaders httpContentHeaders)
+        private static void AddHeaders(IDictionary<string, string> headers, HttpHeaders httpContentHeaders)
         {
-            if (headers != null && headers.Count > 0)
-                foreach (KeyValuePair<string, string> item in headers)
-                    httpContentHeaders.Add(item.Key, item.Value);
+            if (headers == null || headers.Count <= 0) return;
+            foreach (KeyValuePair<string, string> item in headers)
+                httpContentHeaders.Add(item.Key, item.Value);
         }
     }
 }
